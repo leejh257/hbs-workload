@@ -12,3 +12,7 @@ pilot/results/ethereum/coverage_per_key.csv
 __pycache__/
 *.pyc
 .venv/
+
+# Main measurement working files (raw downloads, reduced Parquet, DuckDB database)
+main/work/
+work/
