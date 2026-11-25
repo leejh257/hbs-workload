@@ -1,0 +1,14 @@
+# Raw Mempool Dumpster downloads (about 100 MB per day, re-downloadable)
+data/
+pilot/data/
+*.csv.zip
+*.parquet
+
+# Large per-key outputs (millions of rows); regenerate with the scripts
+pilot/results/ethereum/per_key.csv
+pilot/results/ethereum/coverage_per_key.csv
+
+# Python
+__pycache__/
+*.pyc
+.venv/
