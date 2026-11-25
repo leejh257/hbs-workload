@@ -1,0 +1,5 @@
+table_schema,column_name,data_type
+goog_blockchain_arbitrum_one_us,block_timestamp,TIMESTAMP
+goog_blockchain_arbitrum_one_us,nonce,BIGNUMERIC
+goog_blockchain_arbitrum_one_us,from_address,STRING
+goog_blockchain_arbitrum_one_us,transaction_type,INT64
