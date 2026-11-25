@@ -220,10 +220,13 @@ with open(OUT / "table_mempool.tex", "w") as f:
     f.write("Landed tx per key & Keys & Multiplier & Keys replaced (\\%) & "
             "p99 key ratio & Max key ratio & Coverage (\\%)\\\\\n\\hline\n")
     for lab, (_, r), cv in zip(labels, tm.iterrows(), cov_vals):
-        f.write(f"{lab} & {int(r['keys']):,} & {r['multiplier']:.4f} & "
+        tl = lab.replace("–", "--").replace(">", "$>$")
+        f.write(f"{tl} & {int(r['keys']):,} & {r['multiplier']:.4f} & "
                 f"{r['pct_keys_with_extra']:.2f} & {r['key_ratio_p99']:.3f} & "
                 f"{r['key_ratio_max']:.2f} & {'--' if lab == '1' else f'{cv:.1f}'}\\\\\n")
     f.write("\\hline\n\\end{tabular}\n")
+    f.write("% Coverage classes use the span of landed nonces over all days; the other columns\n"
+            "% use landed transactions after trimming the first and last day.\n")
 
 print(tw.to_string(index=False))
 print("figures written to", OUT)
