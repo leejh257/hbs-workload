@@ -9,8 +9,9 @@ blockchain workloads and selects chain-specific parameters with a blockchain cos
 This repository currently holds the **pilot** measurements; the full measurement and the
 design-space exploration code will be added under separate folders.
 
-Related repository: per-key signature counts for Bitcoin and Ethereum used in the earlier
-systematization study are in [leejh257's SoK data repository](https://github.com/leejh257).
+Related repository: per-key signature counts for Bitcoin and Ethereum and the variant-search code
+used in the earlier systematization study are in
+[hbs-blockchain-signature-limits](https://github.com/leejh257/hbs-blockchain-signature-limits).
 
 ## Layout
 
@@ -41,7 +42,7 @@ Requirements: Python 3.10+, `pip install duckdb pandas`, `curl`, `unzip`.
 
 ```bash
 cd pilot
-./scripts/download_dumpster.sh 2026-11-01 2026-11-09   # creates ./data (about 1 GB)
+bash scripts/download_dumpster.sh 2026-11-01 2026-11-09   # creates ./data (about 1 GB)
 python scripts/eth_replacement_pilot.py                 # replacement multiplier, per-key table
 python scripts/activity_multiplier.py                   # multiplier by activity class
 python scripts/coverage.py                              # public-mempool coverage via nonce gaps
