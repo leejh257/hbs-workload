@@ -1,0 +1,13 @@
+case,class,same_set,regret,family,h,d,a,k,w
+Arbitrum L1 price x1,ordinary,True,0.0,SPX,18,3,9,18,4
+Arbitrum L1 price x1,high,True,0.0,SPX,20,2,12,14,4
+Arbitrum L1 price x1,extreme,True,0.0,SPX,30,3,12,11,4
+Arbitrum L1 price x10,ordinary,True,0.0,SPX,18,3,9,18,4
+Arbitrum L1 price x10,high,True,0.0,SPX,20,2,12,14,4
+Arbitrum L1 price x10,extreme,True,0.0,SPX,30,3,12,11,4
+Arbitrum L1 price x100,ordinary,True,0.0,SPX,18,3,9,18,4
+Arbitrum L1 price x100,high,True,0.0,SPX,20,2,12,14,4
+Arbitrum L1 price x100,extreme,False,0.0191,W+C_P+FP,27,3,11,13,16
+Polygon with EIP-7623 floor,ordinary,True,0.0,SPX,18,3,9,18,4
+Polygon with EIP-7623 floor,high,True,0.0,SPX,20,2,12,14,4
+Polygon with EIP-7623 floor,extreme,True,0.0,SPX,30,3,12,11,4

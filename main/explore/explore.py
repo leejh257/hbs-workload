@@ -132,8 +132,15 @@ def octopus_table(tk):
     return tk, dict(M.interleave_cost_table(t, k))
 
 
-def init_worker(tables, sec_map):
-    """Phase 2 worker: install the precomputed grinding-cost tables and few-time security."""
+def set_classes(cfg):
+    """Every worker: use the class configuration of this run (spawned workers re-import)."""
+    CLASSES.clear()
+    CLASSES.update(cfg)
+
+
+def init_worker(cfg, tables, sec_map):
+    """Phase 2 worker: install the class configuration, grinding tables and few-time security."""
+    set_classes(cfg)
     M._INTERLEAVE_CACHE.update(tables)
     SEC.update(sec_map)
 
@@ -143,7 +150,20 @@ def main() -> None:
     ap.add_argument("--workers", type=int, default=os.cpu_count())
     ap.add_argument("--out", default=os.path.join(os.path.dirname(__file__), "..", "results", "explore"))
     ap.add_argument("--hspan", type=int, default=12, help="h from q-hspan to q+hspan")
+    ap.add_argument("--margin", type=float, default=2.0, help="margin m of every class (Sec. 8)")
+    ap.add_argument("--wallet-s", type=float, default=2.0,
+                    help="signing-time limit of the ordinary class in seconds (Sec. 8)")
+    ap.add_argument("--classes", default="ordinary,high,extreme")
     a = ap.parse_args()
+    t_emb = (368_575_228 / 106_793) / 168e6          # s per compression, Cortex-M4 (Sec. 5.4)
+    cfg = {}
+    for name in a.classes.split(","):
+        c = dict(CLASSES[name], m=a.margin)
+        if name == "ordinary":
+            c["cs_max"] = int(a.wallet_s / t_emb)
+        cfg[name] = c
+    set_classes(cfg)
+    print("classes:", cfg, flush=True)
     os.makedirs(a.out, exist_ok=True)
 
     # One task per (class, family, h, a). The few-time security sum costs about
@@ -164,7 +184,7 @@ def main() -> None:
     ft_units = sorted({(cls, "pors" if fam == "W+C_P+FP" else "fors", h, aa)
                        for cls, fam, h, aa in tasks},
                       key=lambda u: -2.0 ** (CLASSES[u[0]]["q"] - u[2]))
-    with Pool(a.workers) as pool:
+    with Pool(a.workers, initializer=set_classes, initargs=(cfg,)) as pool:
         sec_map = dict(pool.map(few_time, ft_units, chunksize=1))
         tk = sorted({(v[0] * 2 ** u[3], v[0]) for u, v in sec_map.items()
                      if u[1] == "pors" and v[0] is not None and v[0] * 2 ** u[3] <= 2 ** 20},
@@ -172,7 +192,7 @@ def main() -> None:
         tables = dict(pool.map(octopus_table, tk, chunksize=1))
     t1 = time.time()
     # Phase 2: enumerate every (class, family, h, a) with the tables in place.
-    with Pool(a.workers, initializer=init_worker, initargs=(tables, sec_map)) as pool:
+    with Pool(a.workers, initializer=init_worker, initargs=(cfg, tables, sec_map)) as pool:
         results = pool.map(task, tasks, chunksize=1)
     wall = time.time() - t0
     print(f"phase 1: {len(sec_map)} few-time security units and {len(tk)} grinding tables "
