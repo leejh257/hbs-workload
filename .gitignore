@@ -16,3 +16,6 @@ __pycache__/
 # Main measurement working files (raw downloads, reduced Parquet, DuckDB database)
 main/work/
 work/
+
+# SPHINCS-Parameters checkout for the exploration (fetched by setup_upstream.sh)
+main/explore/third_party/

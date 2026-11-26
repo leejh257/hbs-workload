@@ -31,3 +31,15 @@ Run in this order in the BigQuery console; each query states its expected scan s
 All four main queries return the same long table:
 `chain, population, metric, stat, bin_lo, keys, signatures`, with quantiles, a log2 histogram
 and the number of keys above 2^10, 2^16, 2^20 and 2^24.
+
+## 3. Design-space exploration (Section 6)
+
+```bash
+cd main/explore
+sh setup_upstream.sh          # fetches the SPHINCS-Parameters model (pinned commit)
+python explore.py --workers 8 # writes ../results/explore/{candidates,optimum,timing}.csv
+```
+
+`engine.py` and `paths.py` come from the SoK repository
+[hbs-blockchain-signature-limits](https://github.com/leejh257/hbs-blockchain-signature-limits).
+Budget classes, signing bounds and chain cost functions follow Sections 4.5, 5.2 and 5.4.
