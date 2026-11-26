@@ -8,7 +8,8 @@ evaluate the per-chain cost functions of Section 5.2.
 Usage : python explore.py [--workers N] [--out ../results/explore]
 Needs : the SPHINCS-Parameters model (./setup_upstream.sh, or SPHINCS_PARAMS=/path)
 Output: candidates.csv (every feasible set), optimum.csv (best set per class, stage and chain
-        objective), timing.csv (enumeration size and wall time)
+        objective), timing.csv (date, workers, tasks, sets evaluated, feasible sets, wall time s,
+        phase-1 time s, logical CPUs)
 
 engine.py and paths.py are copied from the SoK repository hbs-blockchain-signature-limits.
 """
@@ -73,44 +74,68 @@ def sec(fam: str, h: int, a: int, k: int, qlog: float) -> float:
     return f(h, a, k, qlog)
 
 
+SEC = {}   # (class, layer, h, a) -> (k, sec at budget, at 10x, at 100x), filled by phase 1
+
+
 def task(args):
-    """All feasible sets for one (class, family, h)."""
-    cls, fam, h = args
+    """All feasible sets for one (class, family, h, a)."""
+    cls, fam, h, a = args
     c = CLASSES[cls]
-    qlog = c["q"] + math.log2(c["m"])
     out, tried = [], 0
+    layer = "pors" if fam == "W+C_P+FP" else "fors"
+    k, s_b, s_10, s_100 = SEC[(cls, layer, h, a)]
+    if k is None or (fam == "W+C_P+FP" and k * 2 ** a > 2 ** 20):
+        return 0, []
     for d in range(1, h + 1):
         if h % d or h // d > 22:
             continue
-        amax = 20 if fam == "W+C_P+FP" else 24
-        for a in range(4, amax + 1):
-            k = E.mink("pors" if fam == "W+C_P+FP" else "fors", h, a, qlog)
-            if k is None:
+        for w in FAMILIES[fam]:
+            tried += 1
+            try:
+                m = (M.spx_metrics(h, d, k, a, w) if fam == "SPX"
+                     else M.scheme_metrics(fam, h, d, k, a, w, E.SWN.get(w, 0)))
+            except Exception:
                 continue
-            if fam == "W+C_P+FP" and k * 2 ** a > 2 ** 20:
+            if m["sg"] > c["cs_max"]:
                 continue
-            for w in FAMILIES[fam]:
-                tried += 1
-                try:
-                    m = (M.spx_metrics(h, d, k, a, w) if fam == "SPX"
-                         else M.scheme_metrics(fam, h, d, k, a, w, E.SWN.get(w, 0)))
-                except Exception:
-                    continue
-                if m["sg"] > c["cs_max"]:
-                    continue
-                u = chain_units(m["size"], m["sv"])
-                if u["eth_gas_sha256"] > GAS_CAP:
-                    continue
-                row = {"class": cls, "family": fam, "h": h, "d": d, "a": a, "k": k, "w": w,
-                       "size": m["size"], "sg": m["sg"], "sv": m["sv"],
-                       "cpb": round(m["sv"] / (m["size"] + N_PK), 4),
-                       "btc_ok": m["sv"] / (m["size"] + N_PK) <= BTC_CPB_MAX,
-                       "sec_at_budget": round(sec(fam, h, a, k, qlog), 2),
-                       "sec_at_10x": round(sec(fam, h, a, k, qlog + math.log2(10)), 2),
-                       "sec_at_100x": round(sec(fam, h, a, k, qlog + math.log2(100)), 2),
-                       **u}
-                out.append(row)
+            u = chain_units(m["size"], m["sv"])
+            if u["eth_gas_sha256"] > GAS_CAP:
+                continue
+            row = {"class": cls, "family": fam, "h": h, "d": d, "a": a, "k": k, "w": w,
+                   "size": m["size"], "sg": m["sg"], "sv": m["sv"],
+                   "cpb": round(m["sv"] / (m["size"] + N_PK), 4),
+                   "btc_ok": m["sv"] / (m["size"] + N_PK) <= BTC_CPB_MAX,
+                   "sec_at_budget": s_b, "sec_at_10x": s_10, "sec_at_100x": s_100,
+                   **u}
+            out.append(row)
     return tried, out
+
+
+def few_time(args):
+    """Phase 1a: minimal k and its security at 1x, 10x and 100x the effective budget for one
+    (class, few-time layer, h, a). Shared by every family that uses the same layer."""
+    cls, layer, h, a = args
+    c = CLASSES[cls]
+    qlog = c["q"] + math.log2(c["m"])
+    k = E.mink(layer, h, a, qlog)
+    if k is None:
+        return args, (None, None, None, None)
+    fam = "W+C_P+FP" if layer == "pors" else "SPX"
+    return args, (k, round(sec(fam, h, a, k, qlog), 2),
+                  round(sec(fam, h, a, k, qlog + math.log2(10)), 2),
+                  round(sec(fam, h, a, k, qlog + math.log2(100)), 2))
+
+
+def octopus_table(tk):
+    """Phase 1b: the PORS+FP grinding-cost table for one (t, k), the expensive shared input."""
+    t, k = tk
+    return tk, dict(M.interleave_cost_table(t, k))
+
+
+def init_worker(tables, sec_map):
+    """Phase 2 worker: install the precomputed grinding-cost tables and few-time security."""
+    M._INTERLEAVE_CACHE.update(tables)
+    SEC.update(sec_map)
 
 
 def main() -> None:
@@ -121,13 +146,38 @@ def main() -> None:
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
 
-    tasks = [(cls, fam, h) for cls, c in CLASSES.items() for fam in FAMILIES
-             for h in range(max(4, c["q"] - a.hspan), c["q"] + a.hspan + 1)]
-    tasks.sort(key=lambda t: -t[2])        # large h first for load balance
+    # One task per (class, family, h, a). The few-time security sum costs about
+    # sqrt(2^(Q - h)) terms, and PORS+FP adds its message grinding, so the tasks are
+    # scheduled longest first by that estimate (longest-processing-time rule).
+    tasks = [(cls, fam, h, aa) for cls, c in CLASSES.items() for fam in FAMILIES
+             for h in range(max(4, c["q"] - a.hspan), c["q"] + a.hspan + 1)
+             for aa in range(4, (20 if fam == "W+C_P+FP" else 24) + 1)]
+
+    def est(t):
+        cls, fam, h, _ = t
+        lam = 2.0 ** (CLASSES[cls]["q"] + math.log2(CLASSES[cls]["m"]) - h)
+        return (10 if fam == "W+C_P+FP" else 1) * (math.sqrt(lam) + 10)
+    tasks.sort(key=est, reverse=True)
     t0 = time.time()
+    # Phase 1: the PORS+FP grinding-cost tables depend only on (t, k) and dominate the run time,
+    # so they are computed once, in parallel, and shared with every phase-2 worker.
+    ft_units = sorted({(cls, "pors" if fam == "W+C_P+FP" else "fors", h, aa)
+                       for cls, fam, h, aa in tasks},
+                      key=lambda u: -2.0 ** (CLASSES[u[0]]["q"] - u[2]))
     with Pool(a.workers) as pool:
+        sec_map = dict(pool.map(few_time, ft_units, chunksize=1))
+        tk = sorted({(v[0] * 2 ** u[3], v[0]) for u, v in sec_map.items()
+                     if u[1] == "pors" and v[0] is not None and v[0] * 2 ** u[3] <= 2 ** 20},
+                    key=lambda x: -x[0] * x[1])
+        tables = dict(pool.map(octopus_table, tk, chunksize=1))
+    t1 = time.time()
+    # Phase 2: enumerate every (class, family, h, a) with the tables in place.
+    with Pool(a.workers, initializer=init_worker, initargs=(tables, sec_map)) as pool:
         results = pool.map(task, tasks, chunksize=1)
     wall = time.time() - t0
+    print(f"phase 1: {len(sec_map)} few-time security units and {len(tk)} grinding tables "
+          f"in {t1 - t0:.1f} s; "
+          f"phase 2: {len(tasks)} tasks in {wall - (t1 - t0):.1f} s", flush=True)
     tried = sum(r[0] for r in results)
     rows = [row for r in results for row in r[1]]
     print(f"{len(tasks)} tasks, {tried:,} parameter sets evaluated, {len(rows):,} feasible, "
@@ -139,7 +189,7 @@ def main() -> None:
         wr.writerows(rows)
     with open(os.path.join(a.out, "timing.csv"), "a", newline="") as f:
         csv.writer(f).writerow([time.strftime("%Y-%m-%d %H:%M"), a.workers, len(tasks), tried,
-                                len(rows), round(wall, 1)])
+                                len(rows), round(wall, 1), round(t1 - t0, 1), os.cpu_count()])
 
     objectives = {"bitcoin (vbytes)": ("btc_vbytes", True),
                   "ethereum (gas, SHA-256)": ("eth_gas_sha256", False),
