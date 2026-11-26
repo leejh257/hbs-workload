@@ -19,3 +19,6 @@ work/
 
 # SPHINCS-Parameters checkout for the exploration (fetched by setup_upstream.sh)
 main/explore/third_party/
+main/gasbench/out/
+main/gasbench/cache/
+main/gasbench/out-legacy/

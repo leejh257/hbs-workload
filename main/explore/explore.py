@@ -45,26 +45,45 @@ STAGES = [("S1 FIPS 205 structure, w=16", {"SPX": [16]}),
                            "W+C_F+C": FAMILIES["W+C_F+C"]}),
           ("S5 + PORS+FP", FAMILIES)]
 
-# Chain cost functions (Section 5.2), in resource units
-GAS_PER_HASH = {"sha256": 258, "keccak": 79}
-G0 = 5_000
+# Chain cost functions (Section 5.2), in resource units.
+# EVM verification gas is calibrated on measured transactions (gasbench/, local Prague chain):
+#   execution gas = G0 + g * (verification compressions) + c * (WOTS chains)
+# fitted on the three recommended SLH-DSA sets, SLH-DSA-128s and -128f (max error 1.2% for SHA-256).
+EVM_GAS = {"sha256": (37_906, 363.2, 70.1), "keccak": (38_081, 165.7, 116.7)}
 GAS_CAP = 2 ** 24
 BTC_CPB_MAX = 5.26                         # 1 s per full block at 47.5 ns per compression
 
 
-def eth_gas(size: int, sv: int, g: int, floor_per_byte: int = 40) -> int:
+def wots_chains(fam: str, d: int, w: int) -> int:
+    lgw = w.bit_length() - 1
+    len1 = -(-128 // lgw)
+    if fam != "SPX":                       # WOTS+C: no checksum chains
+        return d * len1
+    len2 = (len1 * (w - 1)).bit_length() - 1
+    return d * (len1 + len2 // lgw + 1)
+
+
+def exec_gas(sv: int, chains: int, h: str) -> int:
+    g0, g, c = EVM_GAS[h]
+    return round(g0 + g * sv + c * chains)
+
+
+def eth_gas(size: int, sv: int, chains: int, h: str, floor_per_byte: int = 40) -> int:
     d = size + N_PK
-    return max(16 * d + G0 + sv * g, floor_per_byte * d)
+    return max(16 * d + exec_gas(sv, chains, h), floor_per_byte * d)
 
 
-def chain_units(size: int, sv: int) -> dict:
+def chain_units(size: int, sv: int, chains: int) -> dict:
     d = size + N_PK
     return {
         "btc_vbytes": d / 4,
-        "eth_gas_sha256": eth_gas(size, sv, GAS_PER_HASH["sha256"]),
-        "eth_gas_keccak": eth_gas(size, sv, GAS_PER_HASH["keccak"]),
-        "eth_gas_sha256_glam": eth_gas(size, sv, GAS_PER_HASH["sha256"], 64),
-        "pol_gas_sha256": 16 * d + G0 + sv * GAS_PER_HASH["sha256"],
+        "eth_gas_sha256": eth_gas(size, sv, chains, "sha256"),
+        "eth_gas_keccak": eth_gas(size, sv, chains, "keccak"),
+        "eth_gas_sha256_glam": eth_gas(size, sv, chains, "sha256", 64),
+        "eth_gas_keccak_glam": eth_gas(size, sv, chains, "keccak", 64),
+        "pol_gas_sha256": 16 * d + exec_gas(sv, chains, "sha256"),
+        "exec_gas_sha256": exec_gas(sv, chains, "sha256"),
+        "chains": chains,
         "rollup_l1_bytes": d,
     }
 
@@ -98,7 +117,7 @@ def task(args):
                 continue
             if m["sg"] > c["cs_max"]:
                 continue
-            u = chain_units(m["size"], m["sv"])
+            u = chain_units(m["size"], m["sv"], wots_chains(fam, d, w))
             if u["eth_gas_sha256"] > GAS_CAP:
                 continue
             row = {"class": cls, "family": fam, "h": h, "d": d, "a": a, "k": k, "w": w,
@@ -215,6 +234,7 @@ def main() -> None:
                   "ethereum (gas, SHA-256)": ("eth_gas_sha256", False),
                   "ethereum (gas, Keccak)": ("eth_gas_keccak", False),
                   "ethereum (gas, SHA-256, Glamsterdam)": ("eth_gas_sha256_glam", False),
+                  "ethereum (gas, Keccak, Glamsterdam)": ("eth_gas_keccak_glam", False),
                   "polygon (gas, SHA-256)": ("pol_gas_sha256", False),
                   "rollup L1 data (bytes)": ("rollup_l1_bytes", False)}
     opt = []

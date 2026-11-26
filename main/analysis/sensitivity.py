@@ -21,29 +21,32 @@ OUT.mkdir(exist_ok=True)
 p1 = pd.read_csv(RES / "bigquery" / "50_prices.csv")
 p2 = pd.read_csv(RES / "bigquery" / "51_l2_prices.csv")
 OPB, OPBLOB, OPC = 5227e-6, 1_014_213e-6, 0.8365
-G0, PK = 5_000, 32
-BASE_128S = {"size": 7856, "sv": 2193}
+PK = 32
+# Measured EVM verification gas (gasbench/): G0 + g * compressions + c * WOTS chains
+EVM_GAS = {"sha256": (37_906, 363.2, 70.1), "keccak": (38_081, 165.7, 116.7)}
+BASE_128S = {"size": 7856, "sv": 2193, "chains": 245}
 
 
 def px(df, chain, item, q="p50"):
     return float(df[(df.chain == chain) & (df["item"] == item)][q].iloc[0])
 
 
-def gas(size, sv, g=258, floor=40):
-    d = size + PK
-    return pd.concat([16 * d + G0 + sv * g, floor * d], axis=1).max(axis=1) if hasattr(size, "__len__") \
-        else max(16 * d + G0 + sv * g, floor * d)
+def gas(df, h="sha256", floor=40):
+    g0, g, c = EVM_GAS[h]
+    d = df["size"] + PK
+    std = 16 * d + g0 + g * df["sv"] + c * df["chains"]
+    return std.where(std > floor * d, floor * d)
 
 
-def fees(df, q="p50", arb_l1_scale=1.0, pol_floor=False, eth_g=258, eth_floor=40):
+def fees(df, q="p50", arb_l1_scale=1.0, pol_floor=False, eth_h="sha256", eth_floor=40):
     """Fee per signature on each chain at price percentile q."""
     base, tip = px(p1, "ethereum", "base_fee", q), px(p1, "ethereum", "priority_fee", q)
     blob, fr = px(p1, "ethereum", "blob_base_fee", q), px(p1, "bitcoin", "feerate", q)
     op, arb, pol = (px(p2, n, "gas_price", q) for n in ("optimism", "arbitrum", "polygon"))
     d = df["size"] + PK
-    g_eth = gas(df["size"], df["sv"], eth_g, eth_floor)
-    g_sha = gas(df["size"], df["sv"])
-    g_pol = gas(df["size"], df["sv"], 258, 40 if pol_floor else 0)
+    g_eth = gas(df, eth_h, eth_floor)
+    g_sha = gas(df)
+    g_pol = gas(df, "sha256", 40 if pol_floor else 0)
     return pd.DataFrame({
         "btc": fr * d / 4,
         "eth": g_eth * (base + tip) / 1e9,
@@ -72,6 +75,19 @@ f50 = fees(base)
 b50 = baseline()
 rec = {(ch, cl): pick(base, ch, cl, f50) for ch in CHAINS for cl in CLASSES}
 key = ["family", "h", "d", "a", "k", "w"]
+
+# 0. Recommended sets (Table 3 of Section 7) and the best set of the SLH-DSA construction
+rows = []
+for cl in CLASSES:
+    for ch in CHAINS:
+        spx = base[base.family == "SPX"]
+        for label, r in (("any", rec[(ch, cl)]), ("FIPS structure", pick(spx, ch, cl, f50.loc[spx.index]))):
+            rows.append({"cls": cl, "chain": ch, "set": label, "fam": r["family"],
+                         "params": f"h={r.h},d={r.d},a={r.a},k={r.k},w={r.w}", "size": r["size"], "sg": r["sg"],
+                         "sv": r["sv"], "fee": f50.loc[r.name, ch], "rel": round(f50.loc[r.name, ch] / b50[ch], 4),
+                         "s10": r["sec_at_10x"], "s100": r["sec_at_100x"],
+                         "eth_gas": r["eth_gas_sha256"], "exec_gas": r["exec_gas_sha256"]})
+pd.DataFrame(rows).to_csv(RES / "explore" / "recommended.csv", index=False)
 
 # 1. Margin and wallet-bound variants: fee of the optimum relative to the base recommendation
 rows = []
@@ -109,8 +125,8 @@ t2 = pd.DataFrame(rows)
 t2.to_csv(OUT / "prices.csv", index=False)
 
 # 3. Ethereum pricing regimes: regret of a set chosen for one regime and deployed under another
-regimes = {"SHA-256, Pectra": dict(eth_g=258, eth_floor=40), "Keccak, Pectra": dict(eth_g=79, eth_floor=40),
-           "SHA-256, Glamsterdam": dict(eth_g=258, eth_floor=64), "Keccak, Glamsterdam": dict(eth_g=79, eth_floor=64)}
+regimes = {"SHA-256, Pectra": dict(eth_h="sha256", eth_floor=40), "Keccak, Pectra": dict(eth_h="keccak", eth_floor=40),
+           "SHA-256, Glamsterdam": dict(eth_h="sha256", eth_floor=64), "Keccak, Glamsterdam": dict(eth_h="keccak", eth_floor=64)}
 fr = {n: fees(base, **kw)["eth"] for n, kw in regimes.items()}
 rows = []
 for cl in CLASSES:

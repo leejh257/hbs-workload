@@ -1,56 +1,56 @@
 variant,class,chain,fee_vs_128s,fee_vs_base_rec,same_set,family,h,d,a,k,w,size,sg,sv,sec_at_10x
 margin 2 (base),ordinary,btc,0.57,0.0,True,W+C_P+FP,20,4,9,16,16,4464,95046,1153,109.76
-margin 2 (base),ordinary,eth,0.372,0.0,True,SPX,18,3,9,18,4,6448,83511,568,101.91
-margin 2 (base),ordinary,op,0.566,0.0,True,W+C_P+FP,20,4,9,16,16,4464,95046,1153,109.76
-margin 2 (base),ordinary,arb,0.374,0.0,True,SPX,18,3,9,18,4,6448,83511,568,101.91
-margin 2 (base),ordinary,pol,0.366,0.0,True,SPX,18,3,9,18,4,6448,83511,568,101.91
+margin 2 (base),ordinary,eth,0.37,0.0,True,SPX,18,3,9,18,4,6448,83511,568,101.91
+margin 2 (base),ordinary,op,0.567,0.0,True,W+C_P+FP,20,4,9,16,16,4464,95046,1153,109.76
+margin 2 (base),ordinary,arb,0.372,0.0,True,SPX,18,3,9,18,4,6448,83511,568,101.91
+margin 2 (base),ordinary,pol,0.37,0.0,True,SPX,18,3,9,18,4,6448,83511,568,101.91
 margin 2 (base),high,btc,0.445,0.0,True,W+C_P+FP,25,5,13,10,256,3476,994971,10369,117.74
-margin 2 (base),high,eth,0.313,0.0,True,SPX,20,2,12,14,4,5424,767995,451,102.71
+margin 2 (base),high,eth,0.305,0.0,True,SPX,20,2,12,14,4,5424,767995,451,102.71
 margin 2 (base),high,op,0.475,0.0,True,W+C_P+FP,27,3,10,13,16,3772,874787,892,120.56
-margin 2 (base),high,arb,0.314,0.0,True,SPX,20,2,12,14,4,5424,767995,451,102.71
-margin 2 (base),high,pol,0.299,0.0,True,SPX,20,2,12,14,4,5424,767995,451,102.71
+margin 2 (base),high,arb,0.306,0.0,True,SPX,20,2,12,14,4,5424,767995,451,102.71
+margin 2 (base),high,pol,0.305,0.0,True,SPX,20,2,12,14,4,5424,767995,451,102.71
 margin 2 (base),extreme,btc,0.483,0.0,True,W+C_P+FP,24,4,13,12,128,3776,1045071,5018,100.76
-margin 2 (base),extreme,eth,0.349,0.0,True,SPX,30,3,12,11,4,6048,1029117,542,120.33
-margin 2 (base),extreme,op,0.498,0.0,True,W+C_P+FP,27,3,11,13,16,3964,926574,904,110.55
-margin 2 (base),extreme,arb,0.35,0.0,True,SPX,30,3,12,11,4,6048,1029117,542,120.33
-margin 2 (base),extreme,pol,0.347,0.0,True,SPX,30,3,12,11,4,6048,1029117,542,120.33
+margin 2 (base),extreme,eth,0.354,0.0,True,SPX,30,3,12,11,4,6048,1029117,542,120.33
+margin 2 (base),extreme,op,0.497,0.0,True,W+C_P+FP,27,3,11,13,16,3964,926574,904,110.55
+margin 2 (base),extreme,arb,0.355,0.0,True,SPX,30,3,12,11,4,6048,1029117,542,120.33
+margin 2 (base),extreme,pol,0.354,0.0,True,SPX,30,3,12,11,4,6048,1029117,542,120.33
 margin 4,ordinary,btc,0.59,0.036,False,W+C_P+FP,20,4,9,17,16,4624,95175,1163,107.15
-margin 4,ordinary,eth,0.42,0.131,False,SPX,24,4,8,17,4,7200,87543,668,115.83
-margin 4,ordinary,op,0.585,0.033,False,W+C_P+FP,20,4,9,17,16,4624,95175,1163,107.15
-margin 4,ordinary,arb,0.422,0.131,False,SPX,24,4,8,17,4,7200,87543,668,115.83
-margin 4,ordinary,pol,0.42,0.148,False,SPX,24,4,8,17,4,7200,87543,668,115.83
+margin 4,ordinary,eth,0.425,0.147,False,SPX,24,4,8,17,4,7200,87543,668,115.83
+margin 4,ordinary,op,0.585,0.032,False,W+C_P+FP,20,4,9,17,16,4624,95175,1163,107.15
+margin 4,ordinary,arb,0.426,0.146,False,SPX,24,4,8,17,4,7200,87543,668,115.83
+margin 4,ordinary,pol,0.425,0.147,False,SPX,24,4,8,17,4,7200,87543,668,115.83
 margin 4,high,btc,0.456,0.025,False,W+C_P+FP,21,3,13,12,64,3564,963077,2259,100.76
-margin 4,high,eth,0.343,0.097,False,SPX,27,3,13,10,4,5952,692733,535,120.34
+margin 4,high,eth,0.35,0.146,False,SPX,27,3,13,10,4,5952,692733,535,120.34
 margin 4,high,op,0.475,0.0,True,W+C_P+FP,27,3,10,13,16,3772,874787,892,115.94
-margin 4,high,arb,0.345,0.097,False,SPX,27,3,13,10,4,5952,692733,535,120.34
-margin 4,high,pol,0.343,0.144,False,SPX,27,3,13,10,4,5952,692733,535,120.34
+margin 4,high,arb,0.351,0.146,False,SPX,27,3,13,10,4,5952,692733,535,120.34
+margin 4,high,pol,0.35,0.146,False,SPX,27,3,13,10,4,5952,692733,535,120.34
 margin 4,extreme,btc,0.487,0.009,False,W+C_P+FP,30,5,11,12,128,3812,954328,6215,115.11
-margin 4,extreme,eth,0.349,0.0,True,SPX,30,3,12,11,4,6048,1029117,542,115.99
-margin 4,extreme,op,0.498,0.0,False,W+C_P+FP,27,3,12,12,16,3964,1033337,904,107.11
-margin 4,extreme,arb,0.35,0.0,True,SPX,30,3,12,11,4,6048,1029117,542,115.99
-margin 4,extreme,pol,0.347,0.0,True,SPX,30,3,12,11,4,6048,1029117,542,115.99
+margin 4,extreme,eth,0.354,0.0,True,SPX,30,3,12,11,4,6048,1029117,542,115.99
+margin 4,extreme,op,0.497,0.0,False,W+C_P+FP,27,3,12,12,16,3964,1033337,904,107.11
+margin 4,extreme,arb,0.355,0.0,True,SPX,30,3,12,11,4,6048,1029117,542,115.99
+margin 4,extreme,pol,0.354,0.0,True,SPX,30,3,12,11,4,6048,1029117,542,115.99
 margin 10,ordinary,btc,0.642,0.126,False,W+C_P+FP,24,6,8,18,32,5032,96158,2626,115.89
-margin 10,ordinary,eth,0.427,0.148,False,SPX,24,4,8,18,4,7344,88310,677,114.21
-margin 10,ordinary,op,0.649,0.147,False,W+C_P+FP,25,5,7,20,16,5092,91888,1410,113.0
-margin 10,ordinary,arb,0.429,0.148,False,SPX,24,4,8,18,4,7344,88310,677,114.21
-margin 10,ordinary,pol,0.427,0.166,False,SPX,24,4,8,18,4,7344,88310,677,114.21
+margin 10,ordinary,eth,0.43,0.162,False,SPX,24,4,8,18,4,7344,88310,677,114.21
+margin 10,ordinary,op,0.651,0.148,False,W+C_P+FP,25,5,7,20,16,5092,91888,1410,113.0
+margin 10,ordinary,arb,0.432,0.162,False,SPX,24,4,8,18,4,7344,88310,677,114.21
+margin 10,ordinary,pol,0.43,0.162,False,SPX,24,4,8,18,4,7344,88310,677,114.21
 margin 10,high,btc,0.458,0.031,False,W+C_P+FP,24,4,13,11,128,3584,1001777,5006,107.2
-margin 10,high,eth,0.349,0.114,False,SPX,30,3,10,13,4,6048,933883,542,120.82
+margin 10,high,eth,0.354,0.16,False,SPX,30,3,10,13,4,6048,933883,542,120.82
 margin 10,high,op,0.475,0.0,False,W+C_P+FP,27,3,11,12,16,3772,973805,892,113.35
-margin 10,high,arb,0.35,0.114,False,SPX,30,3,10,13,4,6048,933883,542,120.82
-margin 10,high,pol,0.347,0.16,False,SPX,30,3,10,13,4,6048,933883,542,120.82
+margin 10,high,arb,0.355,0.16,False,SPX,30,3,10,13,4,6048,933883,542,120.82
+margin 10,high,pol,0.354,0.16,False,SPX,30,3,10,13,4,6048,933883,542,120.82
 margin 10,extreme,btc,0.506,0.047,False,W+C_P+FP,35,5,10,12,64,3956,1015870,3639,118.71
-margin 10,extreme,eth,0.361,0.034,False,SPX,30,3,11,13,4,6256,973819,555,114.31
-margin 10,extreme,op,0.521,0.045,False,W+C_P+FP,27,3,12,13,16,4156,1025311,916,102.99
-margin 10,extreme,arb,0.362,0.034,False,SPX,30,3,11,13,4,6256,973819,555,114.31
-margin 10,extreme,pol,0.357,0.028,False,SPX,30,3,11,13,4,6256,973819,555,114.31
+margin 10,extreme,eth,0.362,0.023,False,SPX,30,3,11,13,4,6256,973819,555,114.31
+margin 10,extreme,op,0.519,0.044,False,W+C_P+FP,27,3,12,13,16,4156,1025311,916,102.99
+margin 10,extreme,arb,0.364,0.023,False,SPX,30,3,11,13,4,6256,973819,555,114.31
+margin 10,extreme,pol,0.362,0.023,False,SPX,30,3,11,13,4,6256,973819,555,114.31
 wallet 1 s,ordinary,btc,0.774,0.359,False,W+C_P+FP,21,7,8,18,16,6076,44497,1907,111.26
-wallet 1 s,ordinary,eth,0.441,0.186,False,SPX,20,4,7,23,4,7632,46067,697,103.95
-wallet 1 s,ordinary,op,0.775,0.37,False,W+C_F+C,20,5,6,30,16,6164,48080,1485,100.7
-wallet 1 s,ordinary,arb,0.443,0.186,False,SPX,20,4,7,23,4,7632,46067,697,103.95
-wallet 1 s,ordinary,pol,0.441,0.205,False,SPX,20,4,7,23,4,7632,46067,697,103.95
+wallet 1 s,ordinary,eth,0.443,0.195,False,SPX,20,4,7,23,4,7632,46067,697,103.95
+wallet 1 s,ordinary,op,0.773,0.363,False,W+C_F+C,20,5,6,30,16,6164,48080,1485,100.7
+wallet 1 s,ordinary,arb,0.444,0.195,False,SPX,20,4,7,23,4,7632,46067,697,103.95
+wallet 1 s,ordinary,pol,0.443,0.195,False,SPX,20,4,7,23,4,7632,46067,697,103.95
 wallet 10 s,ordinary,btc,0.43,-0.246,False,W+C_P+FP,18,3,12,12,64,3356,470602,2246,107.11
-wallet 10 s,ordinary,eth,0.298,-0.198,False,SPX,18,2,11,14,4,5168,383995,435,109.08
-wallet 10 s,ordinary,op,0.454,-0.198,False,W+C_P+FP,16,2,12,14,16,3672,469798,668,102.95
-wallet 10 s,ordinary,arb,0.3,-0.198,False,SPX,18,2,11,14,4,5168,383995,435,109.08
-wallet 10 s,ordinary,pol,0.288,-0.215,False,SPX,18,2,11,14,4,5168,383995,435,109.08
+wallet 10 s,ordinary,eth,0.295,-0.203,False,SPX,18,2,11,14,4,5168,383995,435,109.08
+wallet 10 s,ordinary,op,0.451,-0.204,False,W+C_P+FP,16,2,12,14,16,3672,469798,668,102.95
+wallet 10 s,ordinary,arb,0.296,-0.203,False,SPX,18,2,11,14,4,5168,383995,435,109.08
+wallet 10 s,ordinary,pol,0.295,-0.203,False,SPX,18,2,11,14,4,5168,383995,435,109.08

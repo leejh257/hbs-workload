@@ -1,0 +1,11 @@
+set,impl,signatures,valid_rate,thash_calls,calldata_bytes,gas_used,gas_used_sd,floor_binds
+eth_extreme,SlhDsaVerifierKeccak,16,0.0,479.1,6276.0,267582.8,1484.0,0.5
+eth_extreme,SlhDsaVerifierSha,16,1.0,479.1,6276.0,365917.2,5970.6,0.0
+eth_high,SlhDsaVerifierKeccak,16,0.0,407.9,5668.0,241926.2,172.5,1.0
+eth_high,SlhDsaVerifierSha,16,1.0,407.9,5668.0,319503.2,3072.6,0.0
+eth_ordinary,SlhDsaVerifierKeccak,16,0.0,508.2,6692.0,283430.8,907.8,0.6
+eth_ordinary,SlhDsaVerifierSha,16,1.0,508.2,6692.0,387461.5,4139.0,0.0
+slh_dsa_128f,SlhDsaVerifierKeccak,16,0.0,6188.8,17316.0,1484999.6,16226.7,0.0
+slh_dsa_128f,SlhDsaVerifierSha,16,1.0,6188.8,17316.0,2714189.8,39438.4,0.0
+slh_dsa_128s,SlhDsaVerifierKeccak,4,0.0,2135.5,8100.0,578158.2,16786.8,0.0
+slh_dsa_128s,SlhDsaVerifierSha,4,1.0,2135.5,8100.0,1000240.0,13248.0,0.0

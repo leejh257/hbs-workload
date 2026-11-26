@@ -31,13 +31,12 @@ ETH_STD_TOKEN = 4                 # gas per token; nonzero byte = 4 tokens, zero
 ETH_FLOOR_PER_TOKEN = {"pectra": 10, "glamsterdam": 16}
 ETH_TX_GAS_CAP = 2 ** 24          # EIP-7825 (Fusaka)
 
-# Gas per tweakable-hash call inside a verifier contract (Section 5.2, assumptions)
-#   sha256: precompile 0x02 = 60 + 12 per 32-byte word; input = 64-byte padded seed block
-#           + 22-byte ADRS + 16-byte value = 102 bytes = 4 words -> 108 gas; plus about 150 gas
-#           for STATICCALL (warm, 100), building the input and copying the result.
-#   keccak: KECCAK256 opcode = 30 + 6 per word -> 54 gas; plus about 25 gas of memory work.
-GAS_PER_HASH = {"sha256_precompile": 108 + 150, "keccak_opcode": 54 + 25}
-VERIFIER_OVERHEAD_GAS = 5_000     # dispatch, loops, comparisons (assumption)
+# Verification gas inside a verifier contract (Section 5.2), calibrated on real transactions
+# to the optimized Yul verifiers in gasbench/ on a local Prague chain:
+#   execution gas = G0 + g * (verification compressions) + c * (WOTS chains)
+#   sha256: SHA-256 precompile 0x02 (FIPS 205 SLH-DSA-SHA2); keccak: KECCAK256 (non-standard)
+EVM_GAS = {"sha256_precompile": (37_906, 363.2, 70.1), "keccak_opcode": (38_081, 165.7, 116.7)}
+GAS_PER_HASH = EVM_GAS
 
 # OP Mainnet L1 data fee (Fjord/Jovian formula, OP docs fee-parameters page)
 OP_BASEFEE_SCALAR = 5227e-6
@@ -54,8 +53,8 @@ T_EMBEDDED = (368_575_228 / 106_793) / 168e6
 # SLH-DSA figures from the SPHINCS-Parameters model used in the SoK (c_v = average case).
 SCHEMES = {
     "ECDSA/Schnorr (secp256k1)": {"sig": 64, "pk": 33, "c_s": 0, "c_v": 0, "native": True},
-    "SLH-DSA-SHA2-128s": {"sig": 7856, "pk": 32, "c_s": 2_218_486, "c_v": 2_193, "native": False},
-    "SLH-DSA-SHA2-128f": {"sig": 17088, "pk": 32, "c_s": 106_793, "c_v": 6_407, "native": False},
+    "SLH-DSA-SHA2-128s": {"sig": 7856, "pk": 32, "c_s": 2_218_486, "c_v": 2_193, "chains": 7 * 35, "native": False},
+    "SLH-DSA-SHA2-128f": {"sig": 17088, "pk": 32, "c_s": 106_793, "c_v": 6_407, "chains": 22 * 35, "native": False},
 }
 ECRECOVER_GAS = 3_000
 
@@ -77,8 +76,8 @@ def units(s: dict) -> dict:
     r["btc_sigs_per_block"] = math.floor(BTC_BLOCK_WU / data)
     r["btc_verify_us"] = s["c_v"] * T_DESKTOP * 1e6
     # Ethereum smart-account verification (gas above the 21,000 base)
-    for h, g in GAS_PER_HASH.items():
-        exec_gas = ECRECOVER_GAS if s["native"] else VERIFIER_OVERHEAD_GAS + s["c_v"] * g
+    for h, (g0, g, c) in EVM_GAS.items():
+        exec_gas = ECRECOVER_GAS if s["native"] else round(g0 + s["c_v"] * g + s["chains"] * c)
         for regime in ETH_FLOOR_PER_TOKEN:
             r[f"eth_gas_{h}_{regime}"] = eth_tx_gas(data, exec_gas, regime) - ETH_TX_BASE
         r[f"eth_exec_gas_{h}"] = exec_gas

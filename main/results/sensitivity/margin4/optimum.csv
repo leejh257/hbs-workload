@@ -1,91 +1,106 @@
 class,stage,objective,value,family,h,d,a,k,w,size,sg,sv,sec_at_10x,sec_at_100x
 ordinary,"S1 FIPS 205 structure, w=16",bitcoin (vbytes),1372.0,SPX,20,4,8,20,16,5456,88437,1318,103.07,61.51
-ordinary,"S1 FIPS 205 structure, w=16","ethereum (gas, SHA-256)",391234,SPX,15,3,9,26,16,6096,94737,1117,68.33,8.72
-ordinary,"S1 FIPS 205 structure, w=16","ethereum (gas, Keccak)",219520,SPX,20,4,8,20,16,5456,88437,1318,103.07,61.51
-ordinary,"S1 FIPS 205 structure, w=16","ethereum (gas, SHA-256, Glamsterdam)",392192,SPX,15,3,9,26,16,6096,94737,1117,68.33,8.72
-ordinary,"S1 FIPS 205 structure, w=16","polygon (gas, SHA-256)",391234,SPX,15,3,9,26,16,6096,94737,1117,68.33,8.72
+ordinary,"S1 FIPS 205 structure, w=16","ethereum (gas, SHA-256)",549009,SPX,15,3,9,26,16,6096,94737,1117,68.33,8.72
+ordinary,"S1 FIPS 205 structure, w=16","ethereum (gas, Keccak)",333469,SPX,15,3,9,26,16,6096,94737,1117,68.33,8.72
+ordinary,"S1 FIPS 205 structure, w=16","ethereum (gas, SHA-256, Glamsterdam)",549009,SPX,15,3,9,26,16,6096,94737,1117,68.33,8.72
+ordinary,"S1 FIPS 205 structure, w=16","ethereum (gas, Keccak, Glamsterdam)",360620,SPX,20,4,8,20,16,5456,88437,1318,103.07,61.51
+ordinary,"S1 FIPS 205 structure, w=16","polygon (gas, SHA-256)",549009,SPX,15,3,9,26,16,6096,94737,1117,68.33,8.72
 ordinary,"S1 FIPS 205 structure, w=16",rollup L1 data (bytes),5488,SPX,20,4,8,20,16,5456,88437,1318,103.07,61.51
 ordinary,S2 + choice of w,bitcoin (vbytes),1372.0,SPX,20,4,8,20,16,5456,88437,1318,103.07,61.51
-ordinary,S2 + choice of w,"ethereum (gas, SHA-256)",265600,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
-ordinary,S2 + choice of w,"ethereum (gas, Keccak)",219520,SPX,20,4,8,20,16,5456,88437,1318,103.07,61.51
-ordinary,S2 + choice of w,"ethereum (gas, SHA-256, Glamsterdam)",392192,SPX,15,3,9,26,16,6096,94737,1117,68.33,8.72
-ordinary,S2 + choice of w,"polygon (gas, SHA-256)",260622,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
+ordinary,S2 + choice of w,"ethereum (gas, SHA-256)",368739,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
+ordinary,S2 + choice of w,"ethereum (gas, Keccak)",265600,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
+ordinary,S2 + choice of w,"ethereum (gas, SHA-256, Glamsterdam)",424960,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
+ordinary,S2 + choice of w,"ethereum (gas, Keccak, Glamsterdam)",360620,SPX,20,4,8,20,16,5456,88437,1318,103.07,61.51
+ordinary,S2 + choice of w,"polygon (gas, SHA-256)",368739,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
 ordinary,S2 + choice of w,rollup L1 data (bytes),5488,SPX,20,4,8,20,16,5456,88437,1318,103.07,61.51
 ordinary,S3 + WOTS+C,bitcoin (vbytes),1288.0,W+C,20,4,9,17,16,5120,93183,1199,106.35,69.13
-ordinary,S3 + WOTS+C,"ethereum (gas, SHA-256)",265600,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
-ordinary,S3 + WOTS+C,"ethereum (gas, Keccak)",206080,W+C,20,4,9,17,16,5120,93183,1199,106.35,69.13
-ordinary,S3 + WOTS+C,"ethereum (gas, SHA-256, Glamsterdam)",383744,W+C,15,3,9,26,16,5964,90231,1036,68.33,8.72
-ordinary,S3 + WOTS+C,"polygon (gas, SHA-256)",260622,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
+ordinary,S3 + WOTS+C,"ethereum (gas, SHA-256)",368739,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
+ordinary,S3 + WOTS+C,"ethereum (gas, Keccak)",265600,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
+ordinary,S3 + WOTS+C,"ethereum (gas, SHA-256, Glamsterdam)",424960,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
+ordinary,S3 + WOTS+C,"ethereum (gas, Keccak, Glamsterdam)",334125,W+C,20,4,9,17,16,5120,93183,1199,106.35,69.13
+ordinary,S3 + WOTS+C,"polygon (gas, SHA-256)",368739,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
 ordinary,S3 + WOTS+C,rollup L1 data (bytes),5152,W+C,20,4,9,17,16,5120,93183,1199,106.35,69.13
 ordinary,S4 + FORS+C,bitcoin (vbytes),1248.0,W+C_F+C,20,4,9,17,16,4960,95225,1189,106.35,69.13
-ordinary,S4 + FORS+C,"ethereum (gas, SHA-256)",265600,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
-ordinary,S4 + FORS+C,"ethereum (gas, Keccak)",199680,W+C_F+C,20,4,9,17,16,4960,95225,1189,106.35,69.13
-ordinary,S4 + FORS+C,"ethereum (gas, SHA-256, Glamsterdam)",373504,W+C_F+C,15,3,9,26,16,5804,92273,1026,68.33,8.72
-ordinary,S4 + FORS+C,"polygon (gas, SHA-256)",260622,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
+ordinary,S4 + FORS+C,"ethereum (gas, SHA-256)",368739,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
+ordinary,S4 + FORS+C,"ethereum (gas, Keccak)",265600,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
+ordinary,S4 + FORS+C,"ethereum (gas, SHA-256, Glamsterdam)",424960,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
+ordinary,S4 + FORS+C,"ethereum (gas, Keccak, Glamsterdam)",329908,W+C_F+C,20,4,9,17,16,4960,95225,1189,106.35,69.13
+ordinary,S4 + FORS+C,"polygon (gas, SHA-256)",368739,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
 ordinary,S4 + FORS+C,rollup L1 data (bytes),4992,W+C_F+C,20,4,9,17,16,4960,95225,1189,106.35,69.13
 ordinary,S5 + PORS+FP,bitcoin (vbytes),1164.0,W+C_P+FP,20,4,9,17,16,4624,95175,1163,107.15,68.52
-ordinary,S5 + PORS+FP,"ethereum (gas, SHA-256)",265600,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
-ordinary,S5 + PORS+FP,"ethereum (gas, Keccak)",186240,W+C_P+FP,20,4,9,17,16,4624,95175,1163,107.15,68.52
-ordinary,S5 + PORS+FP,"ethereum (gas, SHA-256, Glamsterdam)",352000,W+C_P+FP,15,3,9,26,16,5468,90319,998,64.82,-0.0
-ordinary,S5 + PORS+FP,"polygon (gas, SHA-256)",260622,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
+ordinary,S5 + PORS+FP,"ethereum (gas, SHA-256)",368739,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
+ordinary,S5 + PORS+FP,"ethereum (gas, Keccak)",265600,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
+ordinary,S5 + PORS+FP,"ethereum (gas, SHA-256, Glamsterdam)",424960,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
+ordinary,S5 + PORS+FP,"ethereum (gas, Keccak, Glamsterdam)",320224,W+C_P+FP,20,4,9,17,16,4624,95175,1163,107.15,68.52
+ordinary,S5 + PORS+FP,"polygon (gas, SHA-256)",368739,SPX,18,3,9,19,4,6608,85047,579,94.96,45.59
 ordinary,S5 + PORS+FP,rollup L1 data (bytes),4656,W+C_P+FP,20,4,9,17,16,4624,95175,1163,107.15,68.52
 high,"S1 FIPS 205 structure, w=16",bitcoin (vbytes),1112.0,SPX,27,3,12,11,16,4416,1012221,1009,120.33,102.89
-high,"S1 FIPS 205 structure, w=16","ethereum (gas, SHA-256)",286134,SPX,18,2,13,15,16,4784,953339,791,84.5,37.34
-high,"S1 FIPS 205 structure, w=16","ethereum (gas, Keccak)",177920,SPX,27,3,12,11,16,4416,1012221,1009,120.33,102.89
-high,"S1 FIPS 205 structure, w=16","ethereum (gas, SHA-256, Glamsterdam)",308224,SPX,18,2,13,15,16,4784,953339,791,84.5,37.34
-high,"S1 FIPS 205 structure, w=16","polygon (gas, SHA-256)",286134,SPX,18,2,13,15,16,4784,953339,791,84.5,37.34
+high,"S1 FIPS 205 structure, w=16","ethereum (gas, SHA-256)",407160,SPX,18,2,13,15,16,4784,953339,791,84.5,37.34
+high,"S1 FIPS 205 structure, w=16","ethereum (gas, Keccak)",254375,SPX,18,2,13,15,16,4784,953339,791,84.5,37.34
+high,"S1 FIPS 205 structure, w=16","ethereum (gas, SHA-256, Glamsterdam)",407160,SPX,18,2,13,15,16,4784,953339,791,84.5,37.34
+high,"S1 FIPS 205 structure, w=16","ethereum (gas, Keccak, Glamsterdam)",288694,SPX,27,3,12,11,16,4416,1012221,1009,120.33,102.89
+high,"S1 FIPS 205 structure, w=16","polygon (gas, SHA-256)",407160,SPX,18,2,13,15,16,4784,953339,791,84.5,37.34
 high,"S1 FIPS 205 structure, w=16",rollup L1 data (bytes),4448,SPX,27,3,12,11,16,4416,1012221,1009,120.33,102.89
 high,S2 + choice of w,bitcoin (vbytes),1088.0,SPX,25,5,13,11,256,4320,1008571,12287,121.91,98.47
-high,S2 + choice of w,"ethereum (gas, SHA-256)",218240,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
-high,S2 + choice of w,"ethereum (gas, Keccak)",177920,SPX,27,3,12,11,16,4416,1012221,1009,120.33,102.89
-high,S2 + choice of w,"ethereum (gas, SHA-256, Glamsterdam)",308224,SPX,18,2,13,15,16,4784,953339,791,84.5,37.34
-high,S2 + choice of w,"polygon (gas, SHA-256)",208654,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
+high,S2 + choice of w,"ethereum (gas, SHA-256)",298539,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
+high,S2 + choice of w,"ethereum (gas, Keccak)",218240,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
+high,S2 + choice of w,"ethereum (gas, SHA-256, Glamsterdam)",349184,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
+high,S2 + choice of w,"ethereum (gas, Keccak, Glamsterdam)",288694,SPX,27,3,12,11,16,4416,1012221,1009,120.33,102.89
+high,S2 + choice of w,"polygon (gas, SHA-256)",298539,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
 high,S2 + choice of w,rollup L1 data (bytes),4352,SPX,25,5,13,11,256,4320,1008571,12287,121.91,98.47
 high,S3 + WOTS+C,bitcoin (vbytes),1032.0,W+C,24,4,13,11,128,4096,896344,5042,115.99,89.37
-high,S3 + WOTS+C,"ethereum (gas, SHA-256)",218240,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
-high,S3 + WOTS+C,"ethereum (gas, Keccak)",170720,W+C,27,3,13,10,16,4236,1047747,924,120.34,104.1
-high,S3 + WOTS+C,"ethereum (gas, SHA-256, Glamsterdam)",302592,W+C,18,2,13,15,16,4696,903295,737,84.5,37.34
-high,S3 + WOTS+C,"polygon (gas, SHA-256)",208654,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
+high,S3 + WOTS+C,"ethereum (gas, SHA-256)",298539,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
+high,S3 + WOTS+C,"ethereum (gas, Keccak)",218240,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
+high,S3 + WOTS+C,"ethereum (gas, SHA-256, Glamsterdam)",349184,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
+high,S3 + WOTS+C,"ethereum (gas, Keccak, Glamsterdam)",273152,W+C,27,3,13,10,16,4236,1047747,924,120.34,104.1
+high,S3 + WOTS+C,"polygon (gas, SHA-256)",298539,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
 high,S3 + WOTS+C,rollup L1 data (bytes),4128,W+C,24,4,13,11,128,4096,896344,5042,115.99,89.37
 high,S4 + FORS+C,bitcoin (vbytes),976.0,W+C_F+C,24,4,13,11,128,3872,929105,5027,115.99,89.37
-high,S4 + FORS+C,"ethereum (gas, SHA-256)",218240,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
-high,S4 + FORS+C,"ethereum (gas, Keccak)",164320,W+C_F+C,27,3,12,11,16,4076,953532,914,120.33,102.89
-high,S4 + FORS+C,"ethereum (gas, SHA-256, Glamsterdam)",288256,W+C_F+C,18,2,13,15,16,4472,936056,722,84.5,37.34
-high,S4 + FORS+C,"polygon (gas, SHA-256)",208654,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
+high,S4 + FORS+C,"ethereum (gas, SHA-256)",298539,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
+high,S4 + FORS+C,"ethereum (gas, Keccak)",218240,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
+high,S4 + FORS+C,"ethereum (gas, SHA-256, Glamsterdam)",349184,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
+high,S4 + FORS+C,"ethereum (gas, Keccak, Glamsterdam)",266462,W+C_F+C,27,3,12,11,16,4076,953532,914,120.33,102.89
+high,S4 + FORS+C,"polygon (gas, SHA-256)",298539,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
 high,S4 + FORS+C,rollup L1 data (bytes),3904,W+C_F+C,24,4,13,11,128,3872,929105,5027,115.99,89.37
 high,S5 + PORS+FP,bitcoin (vbytes),899.0,W+C_P+FP,21,3,13,12,64,3564,963077,2259,100.76,63.85
-high,S5 + PORS+FP,"ethereum (gas, SHA-256)",218240,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
-high,S5 + PORS+FP,"ethereum (gas, Keccak)",152160,W+C_P+FP,27,3,10,13,16,3772,874787,892,115.94,95.06
-high,S5 + PORS+FP,"ethereum (gas, SHA-256, Glamsterdam)",266752,W+C_P+FP,18,2,13,15,16,4136,925816,697,84.33,35.25
-high,S5 + PORS+FP,"polygon (gas, SHA-256)",208654,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
+high,S5 + PORS+FP,"ethereum (gas, SHA-256)",298539,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
+high,S5 + PORS+FP,"ethereum (gas, Keccak)",218240,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
+high,S5 + PORS+FP,"ethereum (gas, SHA-256, Glamsterdam)",349184,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
+high,S5 + PORS+FP,"ethereum (gas, Keccak, Glamsterdam)",257953,W+C_P+FP,27,3,10,13,16,3772,874787,892,115.94,95.06
+high,S5 + PORS+FP,"polygon (gas, SHA-256)",298539,SPX,20,2,13,13,4,5424,915452,451,97.48,56.82
 high,S5 + PORS+FP,rollup L1 data (bytes),3596,W+C_P+FP,21,3,13,12,64,3564,963077,2259,100.76,63.85
 extreme,"S1 FIPS 205 structure, w=16",bitcoin (vbytes),1212.0,SPX,27,3,11,14,16,4816,963066,1034,109.08,73.02
-extreme,"S1 FIPS 205 structure, w=16","ethereum (gas, SHA-256)",349340,SPX,27,3,11,14,16,4816,963066,1034,109.08,73.02
-extreme,"S1 FIPS 205 structure, w=16","ethereum (gas, Keccak)",193920,SPX,27,3,11,14,16,4816,963066,1034,109.08,73.02
-extreme,"S1 FIPS 205 structure, w=16","ethereum (gas, SHA-256, Glamsterdam)",349340,SPX,27,3,11,14,16,4816,963066,1034,109.08,73.02
-extreme,"S1 FIPS 205 structure, w=16","polygon (gas, SHA-256)",349340,SPX,27,3,11,14,16,4816,963066,1034,109.08,73.02
+extreme,"S1 FIPS 205 structure, w=16","ethereum (gas, SHA-256)",498383,SPX,27,3,11,14,16,4816,963066,1034,109.08,73.02
+extreme,"S1 FIPS 205 structure, w=16","ethereum (gas, Keccak)",299236,SPX,27,3,11,14,16,4816,963066,1034,109.08,73.02
+extreme,"S1 FIPS 205 structure, w=16","ethereum (gas, SHA-256, Glamsterdam)",498383,SPX,27,3,11,14,16,4816,963066,1034,109.08,73.02
+extreme,"S1 FIPS 205 structure, w=16","ethereum (gas, Keccak, Glamsterdam)",310272,SPX,27,3,11,14,16,4816,963066,1034,109.08,73.02
+extreme,"S1 FIPS 205 structure, w=16","polygon (gas, SHA-256)",498383,SPX,27,3,11,14,16,4816,963066,1034,109.08,73.02
 extreme,"S1 FIPS 205 structure, w=16",rollup L1 data (bytes),4848,SPX,27,3,11,14,16,4816,963066,1034,109.08,73.02
 extreme,S2 + choice of w,bitcoin (vbytes),1136.0,SPX,30,6,12,11,256,4512,1021050,14701,115.99,95.68
-extreme,S2 + choice of w,"ethereum (gas, SHA-256)",243200,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
-extreme,S2 + choice of w,"ethereum (gas, Keccak)",193920,SPX,27,3,11,14,16,4816,963066,1034,109.08,73.02
-extreme,S2 + choice of w,"ethereum (gas, SHA-256, Glamsterdam)",349340,SPX,27,3,11,14,16,4816,963066,1034,109.08,73.02
-extreme,S2 + choice of w,"polygon (gas, SHA-256)",242116,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
+extreme,S2 + choice of w,"ethereum (gas, SHA-256)",346341,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
+extreme,S2 + choice of w,"ethereum (gas, Keccak)",248977,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
+extreme,S2 + choice of w,"ethereum (gas, SHA-256, Glamsterdam)",389120,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
+extreme,S2 + choice of w,"ethereum (gas, Keccak, Glamsterdam)",310272,SPX,27,3,11,14,16,4816,963066,1034,109.08,73.02
+extreme,S2 + choice of w,"polygon (gas, SHA-256)",346341,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
 extreme,S2 + choice of w,rollup L1 data (bytes),4544,SPX,30,6,12,11,256,4512,1021050,14701,115.99,95.68
 extreme,S3 + WOTS+C,bitcoin (vbytes),1089.0,W+C,30,5,12,11,128,4324,917678,6251,115.99,95.68
-extreme,S3 + WOTS+C,"ethereum (gas, SHA-256)",243200,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
-extreme,S3 + WOTS+C,"ethereum (gas, Keccak)",188640,W+C,27,3,11,14,16,4684,888000,953,109.08,73.02
-extreme,S3 + WOTS+C,"ethereum (gas, SHA-256, Glamsterdam)",326330,W+C,27,3,11,14,16,4684,888000,953,109.08,73.02
-extreme,S3 + WOTS+C,"polygon (gas, SHA-256)",242116,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
+extreme,S3 + WOTS+C,"ethereum (gas, SHA-256)",346341,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
+extreme,S3 + WOTS+C,"ethereum (gas, Keccak)",248977,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
+extreme,S3 + WOTS+C,"ethereum (gas, SHA-256, Glamsterdam)",389120,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
+extreme,S3 + WOTS+C,"ethereum (gas, Keccak, Glamsterdam)",301824,W+C,27,3,11,14,16,4684,888000,953,109.08,73.02
+extreme,S3 + WOTS+C,"polygon (gas, SHA-256)",346341,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
 extreme,S3 + WOTS+C,rollup L1 data (bytes),4356,W+C,30,5,12,11,128,4324,917678,6251,115.99,95.68
 extreme,S4 + FORS+C,bitcoin (vbytes),1037.0,W+C_F+C,30,5,12,11,128,4116,934055,6237,115.99,95.68
-extreme,S4 + FORS+C,"ethereum (gas, SHA-256)",243200,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
-extreme,S4 + FORS+C,"ethereum (gas, Keccak)",180960,W+C_F+C,27,3,11,14,16,4492,896186,941,109.08,73.02
-extreme,S4 + FORS+C,"ethereum (gas, SHA-256, Glamsterdam)",320162,W+C_F+C,27,3,11,14,16,4492,896186,941,109.08,73.02
-extreme,S4 + FORS+C,"polygon (gas, SHA-256)",242116,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
+extreme,S4 + FORS+C,"ethereum (gas, SHA-256)",346341,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
+extreme,S4 + FORS+C,"ethereum (gas, Keccak)",248977,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
+extreme,S4 + FORS+C,"ethereum (gas, SHA-256, Glamsterdam)",389120,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
+extreme,S4 + FORS+C,"ethereum (gas, Keccak, Glamsterdam)",289536,W+C_F+C,27,3,11,14,16,4492,896186,941,109.08,73.02
+extreme,S4 + FORS+C,"polygon (gas, SHA-256)",346341,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
 extreme,S4 + FORS+C,rollup L1 data (bytes),4148,W+C_F+C,30,5,12,11,128,4116,934055,6237,115.99,95.68
 extreme,S5 + PORS+FP,bitcoin (vbytes),961.0,W+C_P+FP,30,5,11,12,128,3812,954328,6215,115.11,92.43
-extreme,S5 + PORS+FP,"ethereum (gas, SHA-256)",243200,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
-extreme,S5 + PORS+FP,"ethereum (gas, Keccak)",159840,W+C_P+FP,27,3,12,12,16,3964,1033337,904,107.11,74.72
-extreme,S5 + PORS+FP,"ethereum (gas, SHA-256, Glamsterdam)",302168,W+C_P+FP,27,3,12,12,16,3964,1033337,904,107.11,74.72
-extreme,S5 + PORS+FP,"polygon (gas, SHA-256)",242116,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
+extreme,S5 + PORS+FP,"ethereum (gas, SHA-256)",346341,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
+extreme,S5 + PORS+FP,"ethereum (gas, Keccak)",248977,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
+extreme,S5 + PORS+FP,"ethereum (gas, SHA-256, Glamsterdam)",389120,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
+extreme,S5 + PORS+FP,"ethereum (gas, Keccak, Glamsterdam)",263013,W+C_P+FP,27,3,12,12,16,3964,1033337,904,107.11,74.72
+extreme,S5 + PORS+FP,"polygon (gas, SHA-256)",346341,SPX,30,3,12,11,4,6048,1029117,542,115.99,95.68
 extreme,S5 + PORS+FP,rollup L1 data (bytes),3844,W+C_P+FP,30,5,11,12,128,3812,954328,6215,115.11,92.43
