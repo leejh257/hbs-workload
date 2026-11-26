@@ -108,11 +108,15 @@ def fees(u: dict, p: pd.DataFrame, l2: pd.DataFrame | None, col: str = "p50") ->
     # OP Mainnet layer-1 data fee for the signature bytes (wei -> gwei)
     l1_per_unit = OP_BASEFEE_SCALAR * 16 * base + OP_BLOB_SCALAR * blob
     f["op_l1_gwei"] = u["op_l1_size_units"] * l1_per_unit / 1e9
+    # Arbitrum: 16 data units per compressed byte, price per unit approximated by blob cost / 16
+    f["arb_l1_gwei"] = u["arb_l1_data_units"] * (blob / 16) / 1e9
     if l2 is not None:
         for net, key in (("optimism", "op"), ("arbitrum", "arb"), ("polygon", "pol")):
             gp = price(l2, net, "gas_price", col)
             gas = u["eth_gas_sha256_precompile_pectra"]
             f[f"{key}_l2_exec_gwei"] = gas * gp / 1e9
+        f["op_total_gwei"] = f["op_l1_gwei"] + f["op_l2_exec_gwei"]
+        f["arb_total_gwei"] = f["arb_l1_gwei"] + f["arb_l2_exec_gwei"]
     return f
 
 
