@@ -1,0 +1,37 @@
+net,table_name,column_name,data_type
+arbitrum,receipts,block_hash,STRING
+arbitrum,receipts,cumulative_gas_used,INT64
+arbitrum,receipts,effective_gas_price,INT64
+arbitrum,receipts,gas_used,INT64
+arbitrum,receipts,transaction_hash,STRING
+arbitrum,transactions,block_hash,STRING
+arbitrum,transactions,gas,INT64
+arbitrum,transactions,gas_price,"STRUCT<string_value STRING, bignumeric_value BIGNUMERIC>"
+arbitrum,transactions,max_fee_per_gas,INT64
+arbitrum,transactions,max_priority_fee_per_gas,INT64
+arbitrum,transactions,transaction_hash,STRING
+arbitrum,transactions,transaction_type,INT64
+optimism,receipts,block_hash,STRING
+optimism,receipts,cumulative_gas_used,INT64
+optimism,receipts,effective_gas_price,INT64
+optimism,receipts,gas_used,INT64
+optimism,receipts,transaction_hash,STRING
+optimism,transactions,block_hash,STRING
+optimism,transactions,gas,INT64
+optimism,transactions,gas_price,"STRUCT<string_value STRING, bignumeric_value BIGNUMERIC>"
+optimism,transactions,max_fee_per_gas,INT64
+optimism,transactions,max_priority_fee_per_gas,INT64
+optimism,transactions,transaction_hash,STRING
+optimism,transactions,transaction_type,INT64
+polygon,receipts,block_hash,STRING
+polygon,receipts,cumulative_gas_used,INT64
+polygon,receipts,effective_gas_price,INT64
+polygon,receipts,gas_used,INT64
+polygon,receipts,transaction_hash,STRING
+polygon,transactions,block_hash,STRING
+polygon,transactions,gas,INT64
+polygon,transactions,gas_price,"STRUCT<string_value STRING, bignumeric_value BIGNUMERIC>"
+polygon,transactions,max_fee_per_gas,INT64
+polygon,transactions,max_priority_fee_per_gas,INT64
+polygon,transactions,transaction_hash,STRING
+polygon,transactions,transaction_type,INT64
