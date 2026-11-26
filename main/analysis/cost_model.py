@@ -46,7 +46,9 @@ OP_FASTLZ_COEF = 0.8365           # estimatedSize per FastLZ byte (incompressibl
 
 # Signing time per compression
 T_DESKTOP = 47.5e-9               # OpenSSL 3.0 SHA-NI, measured in the SoK (2.1 GHz Xeon)
-T_EMBEDDED = 1200 / 168e6         # about 1,200 cycles at 168 MHz (Cortex-M4, assumption)
+# pqm4 (clean) sphincs-sha2-128f-simple signs in 368,575,228 Cortex-M4 cycles; the model counts
+# 106,793 compressions, so about 3,451 cycles per compression, here at 168 MHz (STM32F4 class).
+T_EMBEDDED = (368_575_228 / 106_793) / 168e6
 
 # ---------------------------------------------------------------- schemes (baselines)
 # SLH-DSA figures from the SPHINCS-Parameters model used in the SoK (c_v = average case).
