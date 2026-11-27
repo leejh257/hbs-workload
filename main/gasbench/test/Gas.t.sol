@@ -14,6 +14,7 @@ interface Vm {
     function parseJsonBytes32(string calldata, string calldata) external pure returns (bytes32);
     function parseJsonUintArray(string calldata, string calldata) external pure returns (uint256[] memory);
     function writeLine(string calldata, string calldata) external;
+    function writeFile(string calldata, string calldata) external;
     function toString(uint256) external pure returns (string memory);
     function envOr(string calldata, string calldata) external view returns (string memory);
 }
@@ -32,7 +33,7 @@ contract GasTest {
         bytes32 root = bytes32(vm.parseJsonBytes(j, ".pk_root"));
         uint256[] memory calls = vm.parseJsonUintArray(j, ".verify_thash_calls");
         string memory out = string.concat("results/", name, keccak ? "_keccak" : "_sha256", opt ? "_opt" : "_ref", ".csv");
-        vm.writeLine(out, "i,thash_calls,exec_gas,valid");
+        vm.writeFile(out, "i,thash_calls,exec_gas,valid\n");
         for (uint256 i = 0; i < calls.length; i++) {
             bytes memory msg = vm.parseJsonBytes(j, string.concat(".msgs[", vm.toString(i), "]"));
             bytes memory sig = vm.parseJsonBytes(j, string.concat(".sigs[", vm.toString(i), "]"));

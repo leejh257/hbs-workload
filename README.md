@@ -6,8 +6,9 @@ Measurement code and results for the study
 
 The study derives per-key signature budgets for post-quantum hash-based signatures from real
 blockchain workloads and selects chain-specific parameters with a blockchain cost model.
-`pilot/` holds the pilot measurements and `main/` the six-month main measurement
-(see `main/README.md`); the design-space exploration code will be added in a separate folder.
+`pilot/` holds the pilot measurements. `main/` holds the six-month main measurement, the cost
+model, the design-space exploration, the sensitivity analyses and the on-chain gas measurement of
+SLH-DSA verification (see `main/README.md`).
 
 Related repository: per-key signature counts for Bitcoin and Ethereum and the variant-search code
 used in the earlier systematization study are in
@@ -16,6 +17,14 @@ used in the earlier systematization study are in
 ## Layout
 
 ```
+main/
+  sql/        BigQuery queries (workload and window prices)
+  scripts/    Ethereum mempool download and analysis (Python + DuckDB)
+  analysis/   cost model, figures, rollup optima, sensitivity analyses
+  explore/    design-space exploration (Section 6)
+  gasbench/   Solidity verifiers and gas measurement (Foundry)
+  results/    outputs of all of the above
+  figures/    figures and tables of Sections 4 and 5
 pilot/
   scripts/   Ethereum mempool analysis (Python + DuckDB)
   sql/       ERC-4337 query (BigQuery)

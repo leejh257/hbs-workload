@@ -46,6 +46,10 @@ with c_v the verification compressions of the cost model and chains = d * len (W
 | SHA-256 precompile | 37,906 | 363.2 | 70.1 | 1.2% |
 | KECCAK256 | 38,081 | 165.7 | 116.7 | 1.7% |
 
+The signatures are generated for the SHA-256 instantiation, so the Keccak verifier rejects them;
+it runs the same computation and fails only at the final root comparison, so its gas equals that of a
+valid verification. The Keccak rows serve only to compare hash costs.
+
 A single F call costs 345 gas with the SHA-256 precompile (257 for the STATICCALL and the
 precompile, 88 for loop and memory work) and 130 gas with KECCAK256 (`test/Micro.t.sol`).
 
