@@ -141,6 +141,20 @@ for cl in CLASSES:
 t3 = pd.DataFrame(rows)
 t3.to_csv(OUT / "eth_regimes.csv", index=False)
 
+# 3b. Draft EIP-8311 floor of 96 gas per byte: optimum and regret of the recommended Ethereum set
+rows = []
+for h in ("sha256", "keccak"):
+    f96 = fees(base, eth_h=h, eth_floor=96)
+    b96 = baseline(eth_h=h, eth_floor=96)["eth"]
+    for cl in CLASSES:
+        best = pick(base, "eth", cl, f96)
+        r = rec[("eth", cl)]
+        rows.append({"hash": h, "class": cl, "same_set": best.name == r.name,
+                     "regret": round(f96.loc[r.name, "eth"] / f96.loc[best.name, "eth"] - 1, 3),
+                     "opt_vs_128s": round(f96.loc[best.name, "eth"] / b96, 3), **{k: best[k] for k in key}})
+t3b = pd.DataFrame(rows)
+t3b.to_csv(OUT / "eth_floor96.csv", index=False)
+
 # 4. Arbitrum layer-1 approximation and Polygon floor
 rows = []
 for scale in (1, 10, 100):
@@ -162,5 +176,5 @@ t4 = pd.DataFrame(rows)
 t4.to_csv(OUT / "approximations.csv", index=False)
 
 pd.set_option("display.width", 220)
-for t in (t1, t2, t3, t4):
+for t in (t1, t2, t3, t3b, t4):
     print(t.to_string(index=False), "\n")

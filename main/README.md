@@ -65,7 +65,7 @@ Run from the repository root (`pip install pandas matplotlib`):
 python main/analysis/make_figures.py     # Figs. 1 and 2, Tables 2 and 3
 python main/analysis/cost_model.py       # Tables 5 and 6 (main/figures/table_cost_*.csv)
 python main/analysis/rollup_optimum.py   # rollup optima per price percentile and stage
-python main/analysis/sensitivity.py      # recommended sets (Table 10) and Section 8 tables
+python main/analysis/sensitivity.py      # recommended sets (Table 10), Section 8 tables and the EIP-8311 floor case
 ```
 
 ## 5. On-chain verification gas (Section 5.2)

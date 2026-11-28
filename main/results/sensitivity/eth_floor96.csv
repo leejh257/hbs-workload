@@ -1,0 +1,7 @@
+hash,class,same_set,regret,opt_vs_128s,family,h,d,a,k,w
+sha256,ordinary,False,0.157,0.55,W+C_P+FP,20,4,9,16,16
+sha256,high,False,0.22,0.439,W+C_P+FP,27,3,10,13,16
+sha256,extreme,False,0.336,0.447,W+C_P+FP,27,3,11,13,16
+keccak,ordinary,False,0.441,0.57,W+C_P+FP,20,4,9,16,16
+keccak,high,False,0.497,0.462,W+C_P+FP,24,3,10,14,32
+keccak,extreme,False,0.522,0.507,W+C_P+FP,27,3,11,13,16
