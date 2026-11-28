@@ -125,7 +125,7 @@ ax.plot(xs, act["key_ratio_p99"], color=C["7702"], lw=1.4, marker="s", ms=4,
 for x, v in zip(xs, act["key_ratio_p99"]):
     ax.annotate(f"{v:.2f}", (x, v), textcoords="offset points", xytext=(0, 5),
                 ha="center", fontsize=6.5, color=INK)
-ax.set_ylabel("Signatures per landed transaction")
+ax.set_ylabel("Signatures per included transaction")
 ax.set_title("(a) Replacement multiplier", loc="left")
 ax.set_ylim(0.95, 2.1)
 
@@ -153,7 +153,7 @@ ax.set_title("(b) Replacement exposure and public visibility", loc="left")
 
 for ax in axes:
     ax.set_xticks(list(xs), labels)
-    ax.set_xlabel("Landed transactions per key in 184 days")
+    ax.set_xlabel("Included transactions per key in 184 days")
     ax.grid(True, axis="y", color=GRID, linewidth=0.5)
     ax.set_axisbelow(True)
     for s in ("top", "right"):
@@ -217,7 +217,7 @@ tm.to_csv(OUT / "table_mempool.csv", index=False)
 with open(OUT / "table_mempool.tex", "w") as f:
     f.write("% Ethereum public mempool, 2026-05-02 to 2026-10-30 (edge days trimmed)\n")
     f.write("\\begin{tabular}{lrrrrrr}\n\\hline\n")
-    f.write("Landed tx per key & Keys & Multiplier & Keys replaced (\\%) & "
+    f.write("Included tx per key & Keys & Multiplier & Keys replaced (\\%) & "
             "p99 key ratio & Max key ratio & Coverage (\\%)\\\\\n\\hline\n")
     for lab, (_, r), cv in zip(labels, tm.iterrows(), cov_vals):
         tl = lab.replace("–", "--").replace(">", "$>$")
@@ -225,8 +225,8 @@ with open(OUT / "table_mempool.tex", "w") as f:
                 f"{r['pct_keys_with_extra']:.2f} & {r['key_ratio_p99']:.3f} & "
                 f"{r['key_ratio_max']:.2f} & {'--' if lab == '1' else f'{cv:.1f}'}\\\\\n")
     f.write("\\hline\n\\end{tabular}\n")
-    f.write("% Coverage classes use the span of landed nonces over all days; the other columns\n"
-            "% use landed transactions after trimming the first and last day.\n")
+    f.write("% Coverage classes use the span of included nonces over all days; the other columns\n"
+            "% use included transactions after trimming the first and last day.\n")
 
 print(tw.to_string(index=False))
 print("figures written to", OUT)
