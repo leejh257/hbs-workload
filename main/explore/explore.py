@@ -26,7 +26,8 @@ import engine as E
 M = E.M
 N_PK = 32                                  # public key revealed at spend (PK.seed + PK.root)
 
-# Budget classes of Section 4.5: log2 of m * q, and the signing bound C_s of Section 5.4
+# Budget classes of Section 4.5: log2 of the budget q, the margin m (the effective budget is m * q),
+# and the signing bound C_s of Section 5.4
 CLASSES = {
     "ordinary": {"q": 16, "m": 2.0, "cs_max": 97_354},     # 2 s on a 168 MHz Cortex-M4
     "high":     {"q": 20, "m": 2.0, "cs_max": 1_052_631},  # 50 ms on a server core

@@ -48,6 +48,11 @@ python explore.py --workers 8 # writes ../results/explore/{candidates,optimum,ti
 [hbs-blockchain-signature-limits](https://github.com/leejh257/hbs-blockchain-signature-limits).
 Budget classes, signing bounds and chain cost functions follow Sections 4.5, 5.2 and 5.4.
 
+`results/explore/timing_v1_i7-12700KF.csv` and `timing_v2_i7-12700KF.csv` hold the run times of
+Table 9 (first, one-phase version and the two-phase version). They were recorded before the final
+revision of the cost model and therefore list 19,446 feasible sets; the current code yields 18,753.
+The enumeration and its run time are unaffected, because only the feasibility filter changed.
+
 Sensitivity runs of Section 8 rerun the exploration with other margins and wallet bounds, for example
 `python explore.py --margin 10 --out ../results/sensitivity/margin10` and
 `python explore.py --wallet-s 1 --classes ordinary --out ../results/sensitivity/wallet1s`.
