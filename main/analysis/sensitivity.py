@@ -175,6 +175,27 @@ for cl in CLASSES:
 t4 = pd.DataFrame(rows)
 t4.to_csv(OUT / "approximations.csv", index=False)
 
+# 5. Sources of the saving: best set per stage (S1: FIPS 205 structure with w=16, S2: any w,
+#    S3: + WOTS+C, S4: + FORS+C, S5: + PORS+FP) and the SP 800-230 set SLH-DSA-SHA2-128-24
+#    (h=22, d=1, a=24, k=6, w=4: 3,856 bytes, 298 compressions to verify, 68 WOTS chains), all relative
+#    to SLH-DSA-SHA2-128s. The 128-24 set needs about 1.5e9 compressions to sign, far above every
+#    signing bound of Section 5.4, so it is reported for comparison only.
+SP800230 = pd.DataFrame([{"size": 3856, "sv": 298, "chains": 68}])
+f24 = fees(SP800230).iloc[0]
+stages = {"S1": (base.family == "SPX") & (base.w == 16), "S2": base.family == "SPX",
+          "S3": base.family.isin(["SPX", "W+C"]), "S4": base.family.isin(["SPX", "W+C", "W+C_F+C"]),
+          "S5": base.family.notna()}
+rows = []
+for ch in CHAINS:
+    for cl in CLASSES:
+        r = {"chain": ch, "class": cl, "sp800230_128_24": round(f24[ch] / b50[ch], 3)}
+        for st, mask in stages.items():
+            p = pick(base[mask], ch, cl, f50)
+            r[st] = round(f50.loc[p.name, ch] / b50[ch], 3)
+        rows.append(r)
+t5 = pd.DataFrame(rows)
+t5.to_csv(OUT / "stages.csv", index=False)
+
 pd.set_option("display.width", 220)
-for t in (t1, t2, t3, t3b, t4):
+for t in (t1, t2, t3, t3b, t4, t5):
     print(t.to_string(index=False), "\n")
